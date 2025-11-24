@@ -82,7 +82,7 @@ export default function WelcomeModal(props: {
         <Separator orientation="horizontal" size="4" className="my-5" />
         <Flex className="flex items-center gap-4">
           <a
-            href="https://www.kevinliu.biz/"
+            href="https://kevin-liu.tech/"
             className="flex items-center rounded-lg bg-orange-200 px-3 py-2 text-sm font-semibold text-orange-800 transition hover:bg-orange-100 hover:underline sm:px-4 sm:text-base"
           >
             <span className="mr-1 hidden xs:flex">By </span>{" "}
