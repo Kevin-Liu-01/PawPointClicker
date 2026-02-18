@@ -7,6 +7,8 @@ import { type Metadata, type Viewport } from "next";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 
+import { Analytics } from "@vercel/analytics/next"
+
 // import { Roboto } from "next/font/google";
 
 // const roboto = Roboto({
@@ -184,6 +186,7 @@ export default function RootLayout({
         <Theme>
           <SessionProvider session={session}>{children}</SessionProvider>
         </Theme>
+        <Analytics />
       </body>
     </html>
   );
