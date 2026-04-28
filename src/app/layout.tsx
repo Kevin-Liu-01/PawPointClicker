@@ -89,6 +89,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
+    url: "/",
     siteName: "Paw Point Clicker",
     title: "Paw Point Clicker | Princeton's Ultimate Idle Clicker Game 🐾",
     description:
@@ -109,11 +110,12 @@ export const metadata: Metadata = {
   // ═══════════════════════════════════════════════════════════════════════════
   twitter: {
     card: "summary_large_image",
+    site: "@kevskgs",
     title: "Paw Point Clicker 🐾 | Free Idle Clicker Game",
     description:
       "Scan your prox, collect Paw Points, and dominate the leaderboard! A Princeton-inspired incremental game with 12 collectors, prestige system, and 30+ achievements. Play free now!",
     images: ["/images/pawpointclicker.png"],
-    creator: "@kevinliu",
+    creator: "@kevskgs",
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
