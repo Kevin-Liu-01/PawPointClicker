@@ -1,9 +1,11 @@
 // src/app/api/getAllUserData/route.ts
 import { NextResponse } from "next/server";
+import { auth } from "~/server/auth";
 import firestore from "../../utilities/firestore";
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
+    const viewer = await auth();
     const snapshot = await firestore.collection("users").get();
     const leaderboardData: any[] = [];
 
@@ -29,9 +31,13 @@ export async function GET(request: Request) {
         spaceStation,
       } = data;
 
+      // Documents are keyed by email; send only the public name and picture.
       leaderboardData.push({
-        id: doc.id,
-        session,
+        id: leaderboardData.length,
+        you: doc.id === viewer?.user?.email,
+        session: {
+          user: { name: session?.user?.name, image: session?.user?.image },
+        },
         proxName,
         lifeTimeEarnings,
         prestige,

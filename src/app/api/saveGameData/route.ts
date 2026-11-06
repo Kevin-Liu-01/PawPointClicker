@@ -1,21 +1,23 @@
 // src/app/api/saveGameData/route.ts
 
 import { NextResponse } from "next/server";
+import { auth } from "~/server/auth";
 import firestore from "../../utilities/firestore";
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const { userId, gameData } = body;
-
-    if (!userId || !gameData) {
-      return NextResponse.json(
-        { error: "Missing user ID or game data" },
-        { status: 400 },
-      );
+    const session = await auth();
+    const userId = session?.user?.email;
+    if (!userId) {
+      return NextResponse.json({ error: "Not signed in" }, { status: 401 });
     }
 
-    // Access the document based on the user ID (for example, using the email)
+    const { gameData } = await request.json();
+    if (!gameData) {
+      return NextResponse.json({ error: "Missing game data" }, { status: 400 });
+    }
+
+    // Each player's document is keyed by the signed-in email.
     const userDoc = firestore.collection("users").doc(userId);
 
     // Set or merge the game data

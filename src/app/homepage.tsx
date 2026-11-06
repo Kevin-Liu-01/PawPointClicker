@@ -338,8 +338,7 @@ export default function HomePage({ session }: any) {
     if (session?.user?.email) {
       async function initializeUser() {
         try {
-          const userEmail = encodeURIComponent(session.user.email);
-          const res = await fetch(`/api/getUserData?userId=${userEmail}`);
+          const res = await fetch("/api/getUserData");
           const { data, error } = await res.json();
           if (error) {
             console.error("Error from API:", error);
@@ -607,7 +606,7 @@ export default function HomePage({ session }: any) {
       fetch("/api/saveGameData", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: session.user.email, gameData }),
+        body: JSON.stringify({ gameData }),
       }).catch((err) => console.error("Error saving game data: ", err));
     }, 30000);
 
@@ -620,8 +619,7 @@ export default function HomePage({ session }: any) {
       async function fetchUserData() {
         console.log(`Fetching user data for ${session?.user.name}.`);
         try {
-          const userEmail = encodeURIComponent(session.user.email);
-          const res = await fetch(`/api/getUserData?userId=${userEmail}`);
+          const res = await fetch("/api/getUserData");
           const { data, error } = await res.json();
           console.log("Fetched data from backend:", data);
           if (error) {

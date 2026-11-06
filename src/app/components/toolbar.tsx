@@ -104,11 +104,7 @@ export default function Toolbar({
   // Look for the current session's user in the leaderboard players.
   useEffect(() => {
     if (session && session.user && players.length > 0) {
-      const userEmail = session.user.email;
-      // Find the index by comparing emails (adjust the path if your data structure is different).
-      const userIndex = players.findIndex(
-        (player) => player.session?.user?.email === userEmail,
-      );
+      const userIndex = players.findIndex((player) => player.you);
       if (userIndex !== -1) {
         // userIndex is zero-based so rank is userIndex + 1.
         const rank = userIndex + 1;

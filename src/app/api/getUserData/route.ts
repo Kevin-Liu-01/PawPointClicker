@@ -1,13 +1,14 @@
 // src/app/api/getUserData/route.ts
 
 import { NextResponse } from "next/server";
+import { auth } from "~/server/auth";
 import firestore from "../../utilities/firestore";
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const userId = searchParams.get("userId");
+export async function GET() {
+  const session = await auth();
+  const userId = session?.user?.email;
 
   if (!userId) {
-    return NextResponse.json({ error: "Missing userId" }, { status: 400 });
+    return NextResponse.json({ error: "Not signed in" }, { status: 401 });
   }
 
   try {
